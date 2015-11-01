@@ -5,4 +5,4 @@ cysqlite3:
 
 .PHONY: clean
 clean:
-	rm -rf sqlite.c sqlite3.so build
+	@rm -rf sqlite3.c sqlite3.so build
