@@ -5,7 +5,9 @@ sources = []
 
 include_dirs = []
 
-libraries = []
+libraries = [
+    'sqlite3'
+]
 
 DEBUG = True
 if DEBUG:
@@ -21,4 +23,6 @@ ext = Extension("sqlite3",
                 extra_compile_args=CFLAGS)
 
 setup(name="sqlite3 wrapper used of Cython",
-      ext_modules=cythonize([ext]))
+      ext_modules=cythonize([ext]),
+      setup_requires=['Cython >= 0.23.4'],
+      install_requires=['Cython >= 0.23.4'])
