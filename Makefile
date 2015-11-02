@@ -6,3 +6,6 @@ cysqlite3:
 .PHONY: clean
 clean:
 	@rm -rf sqlite3.c sqlite3.so build
+
+test:
+	python tests/test.py
