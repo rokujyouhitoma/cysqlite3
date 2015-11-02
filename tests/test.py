@@ -6,3 +6,4 @@ print(test_sqlite3.test_xxx)
 print(test_sqlite3.test_xxx())
 
 print(test_sqlite3.test_xxx2)
+print(test_sqlite3.test_xxx2())

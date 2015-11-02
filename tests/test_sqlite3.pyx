@@ -3,8 +3,8 @@ from sqlite3 cimport *
 #from sqlite3 cimport sqlite3, sqlite3_open, sqlite3_close
 #from sqlite3 cimport sqlite3_errmsg
 #from sqlite3 cimport sqlite3_stmt, sqlite3_step
-#from sqlite3 cimport sqlite3_prepare_v2
-#from sqlite3 cimport SQLITE_OK
+#from sqlite3 cimport sqlite3_prepare_v2, sqlite3_column_text
+#from sqlite3 cimport SQLITE_OK, SQLITE_ROW
 
 def test_xxx():
     cdef sqlite3 *db
@@ -31,7 +31,9 @@ def test_xxx2():
         print("Failed to fetch data: %s" % sqlite3_errmsg(db))
         sqlite3_close(db)
         return 1
-    rc = sqlite3_step(res)
-    
+    rc = sqlite3_step(stmt)
+    if rc == SQLITE_ROW:
+        print("%s" % sqlite3_column_text(stmt, 0))
+    sqlite3_finalize(stmt)
     sqlite3_close(db)
     return 0
