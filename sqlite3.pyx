@@ -9,5 +9,5 @@ cdef version_info_from_version(s):
 version = "0.0.1"
 version_info = version_info_from_version(version)
 
-sqlite_version = SQLITE_VERSION
-sqlite_version_info = tuple([int(x) for x in string.split(version, ".")])
+sqlite_version = _C_SQLITE_VERSION
+sqlite_version_info = version_info_from_version(sqlite_version)
