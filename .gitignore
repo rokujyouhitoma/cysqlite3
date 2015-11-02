@@ -4,3 +4,4 @@ sqlite3.so
 
 # cython
 build/
+*.pyxbldc
