@@ -4,6 +4,7 @@ from sqlite3 cimport *
 #from sqlite3 cimport sqlite3_errmsg
 #from sqlite3 cimport sqlite3_stmt, sqlite3_step
 #from sqlite3 cimport sqlite3_prepare_v2, sqlite3_column_text
+#from sqlite3 cimport sqlite3_exec, sqlite3_free
 #from sqlite3 cimport SQLITE_OK, SQLITE_ROW
 
 def test_xxx():
