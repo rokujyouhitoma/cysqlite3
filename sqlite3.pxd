@@ -4,6 +4,9 @@ cdef extern from "<sqlite3.h>":
   cdef int SQLITE_VERSION_NUMBER #L114
   cdef char[] SQLITE_SOURCE_ID #L115
   ctypedef struct sqlite3 #L231
+  #TODO: support for multy platforms.
+  ctypedef long long int sqlite_int64 #L256
+  ctypedef sqlite_int64 sqlite3_int64 #L259
   cdef extern int sqlite3_close(sqlite3*) #L312
   cdef extern int sqlite3_exec(
       sqlite3*,
@@ -42,6 +45,7 @@ cdef extern from "<sqlite3.h>":
   cdef int SQLITE_WARNING
   cdef int SQLITE_ROW
   cdef int SQLITE_DONE #L434
+  cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*)
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
