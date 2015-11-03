@@ -1,4 +1,5 @@
-from setuptools import setup, Extension
+from distutils.core import setup, Extension
+#from setuptools import setup, Extension
 from Cython.Build import cythonize
 
 sources = []
@@ -24,5 +25,6 @@ ext = Extension("sqlite3",
 
 setup(name="sqlite3 wrapper used of Cython",
       ext_modules=cythonize([ext]),
-      setup_requires=['Cython >= 0.23.4'],
-      install_requires=['Cython >= 0.23.4'])
+#      setup_requires=['Cython >= 0.23.4'],
+#      install_requires=['Cython >= 0.23.4']
+)
