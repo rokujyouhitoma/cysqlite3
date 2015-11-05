@@ -50,6 +50,12 @@ cdef extern from "<sqlite3.h>":
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
   ctypedef struct sqlite3_stmt #L3013
+  cdef extern int sqlite3_prepare(
+      sqlite3 *db,
+      const char *zSql,
+      int nByte,
+      sqlite3_stmt **ppStmt,
+      const char **pzTail) #L3208
   cdef extern int sqlite3_prepare_v2(
       sqlite3 *db,
       const char *zSql,

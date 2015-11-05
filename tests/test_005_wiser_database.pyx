@@ -21,7 +21,7 @@ from sqlite3 cimport sqlite3_exec, sqlite3_prepare
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK
 
-
+# Translate it from wiser/wiser.h
 cdef struct _wiser_env:
     const char *db_path
     # int token_len
@@ -49,6 +49,7 @@ cdef struct _wiser_env:
     sqlite3_stmt *rollback_st
 ctypedef _wiser_env wiser_env
     
+# Translate it from wiser/database.c
 cdef int init_database(wiser_env *env, const char *db_path):
     cdef int rc = sqlite3_open(db_path, &env.db)
     if rc == SQLITE_OK:
