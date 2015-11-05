@@ -18,8 +18,11 @@ cimport sqlite3
 from sqlite3 cimport sqlite3, sqlite3_open, sqlite3_close
 from sqlite3 cimport sqlite3_stmt
 from sqlite3 cimport sqlite3_exec, sqlite3_prepare
+from sqlite3 cimport sqlite3_bind_text
+from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK
+#from sqlite3 cimport SQLITE_STATIC
 
 # Translate it from wiser/wiser.h
 cdef struct _wiser_env:
@@ -126,3 +129,36 @@ postings   BLOB NOT NULL);""",
                     "ROLLBACK;",
                     -1, &env.rollback_st, NULL);
     return 0
+
+# Translate it from wiser/database.c
+cdef void fin_database(wiser_env *env):
+    sqlite3_finalize(env.get_document_id_st)
+    sqlite3_finalize(env.get_document_title_st)
+    sqlite3_finalize(env.insert_document_st)
+    sqlite3_finalize(env.update_document_st)
+    sqlite3_finalize(env.get_token_id_st)
+    sqlite3_finalize(env.get_token_st)
+    sqlite3_finalize(env.store_token_st)
+    sqlite3_finalize(env.get_postings_st)
+    sqlite3_finalize(env.update_postings_st)
+    sqlite3_finalize(env.get_settings_st)
+    sqlite3_finalize(env.replace_settings_st)
+    sqlite3_finalize(env.get_document_count_st)
+    sqlite3_finalize(env.begin_st)
+    sqlite3_finalize(env.commit_st)
+    sqlite3_finalize(env.rollback_st)
+    sqlite3_close(env.db)
+
+# Translate it from wiser/database.c
+cdef int db_get_document_id(const wiser_env *env,
+                            const char *title, unsigned int title_size):
+    cdef int rc
+    sqlite3_reset(env.get_document_id_st)
+    # sqlite3_bind_text(env.get_document_id_st, 1,
+    #                   title, title_size, SQLITE_STATIC)
+    # rc = sqlite3_step(env.get_document_id_st)
+    # if rc == SQLITE_ROW:
+    #     return sqlite3_column_int(env.get_document_id_st, 0)
+    # else:
+    #     return 0
+    
