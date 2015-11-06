@@ -17,11 +17,12 @@ __LICENSE__ = """Today Ike Tohru 11:31pm Ike Tohru
 cimport sqlite3
 from sqlite3 cimport sqlite3, sqlite3_open, sqlite3_close
 from sqlite3 cimport sqlite3_stmt
+from sqlite3 cimport sqlite3_step, sqlite3_column_int
 from sqlite3 cimport sqlite3_exec, sqlite3_prepare
 from sqlite3 cimport sqlite3_bind_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_errmsg
-from sqlite3 cimport SQLITE_OK
+from sqlite3 cimport SQLITE_OK, SQLITE_ROW
 #from sqlite3 cimport SQLITE_STATIC
 
 # Translate it from wiser/wiser.h
@@ -51,7 +52,7 @@ cdef struct _wiser_env:
     sqlite3_stmt *commit_st
     sqlite3_stmt *rollback_st
 ctypedef _wiser_env wiser_env
-    
+
 # Translate it from wiser/database.c
 cdef int init_database(wiser_env *env, const char *db_path):
     cdef int rc = sqlite3_open(db_path, &env.db)
@@ -156,9 +157,10 @@ cdef int db_get_document_id(const wiser_env *env,
     sqlite3_reset(env.get_document_id_st)
     # sqlite3_bind_text(env.get_document_id_st, 1,
     #                   title, title_size, SQLITE_STATIC)
-    # rc = sqlite3_step(env.get_document_id_st)
-    # if rc == SQLITE_ROW:
-    #     return sqlite3_column_int(env.get_document_id_st, 0)
-    # else:
-    #     return 0
-    
+    sqlite3_bind_text(env.get_document_id_st, 1,
+                      title, title_size, NULL)
+    rc = sqlite3_step(env.get_document_id_st)
+    if rc == SQLITE_ROW:
+        return sqlite3_column_int(env.get_document_id_st, 0)
+    else:
+        return 0
