@@ -72,4 +72,6 @@ cdef extern from "<sqlite3.h>":
   cdef extern const unsigned char *sqlite3_column_text(sqlite3_stmt*, int iCol) #L3942
   cdef extern int sqlite3_finalize(sqlite3_stmt *pStmt) #L3972
   cdef extern int sqlite3_reset(sqlite3_stmt *pStmt) #L3998
-  ctypedef void (*sqlite3_destructor_type)(void*) #L4368
+  ctypedef void (*sqlite3_destructor_type)(void*) #L4367
+  cdef sqlite3_destructor_type SQLITE_STATIC = <sqlite3_destructor_type>0 #L4368
+  cdef sqlite3_destructor_type SQLITE_TRANSIENT = <sqlite3_destructor_type>-1 #L4369

@@ -23,7 +23,7 @@ from sqlite3 cimport sqlite3_bind_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK, SQLITE_ROW
-#from sqlite3 cimport SQLITE_STATIC
+from sqlite3 cimport SQLITE_STATIC
 
 # Translate it from wiser/wiser.h
 cdef struct _wiser_env:
@@ -155,12 +155,11 @@ cdef int db_get_document_id(const wiser_env *env,
                             const char *title, unsigned int title_size):
     cdef int rc
     sqlite3_reset(env.get_document_id_st)
-    # sqlite3_bind_text(env.get_document_id_st, 1,
-    #                   title, title_size, SQLITE_STATIC)
     sqlite3_bind_text(env.get_document_id_st, 1,
-                      title, title_size, NULL)
+                      title, title_size, SQLITE_STATIC)
     rc = sqlite3_step(env.get_document_id_st)
     if rc == SQLITE_ROW:
         return sqlite3_column_int(env.get_document_id_st, 0)
     else:
         return 0
+    #TODO
