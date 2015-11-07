@@ -25,6 +25,7 @@ from sqlite3 cimport sqlite3_column_int, sqlite3_column_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK, SQLITE_ROW
+from sqlite3 cimport SQLITE_BUSY, SQLITE_ERROR, SQLITE_MISUSE
 from sqlite3 cimport SQLITE_STATIC
 
 # Translate it from wiser/wiser.h
@@ -179,3 +180,28 @@ cdef int db_get_document_title(const wiser_env *env, int document_id,
             title_size[0] = <int>sqlite3_column_bytes(env.get_document_title_st,
                                                       0)
     return 0
+
+
+cdef int db_add_document(const wiser_env *env,
+                         const char *title, unsigned int title_size,
+                         const char *body, unsigned int body_size):
+    cdef sqlite3_stmt *st
+    cdef int rc = 0, document_id
+    document_id = db_get_document_id(env, title, title_size)
+    if document_id:
+        st = env.update_document_st
+        sqlite3_reset(st)
+        sqlite3_bind_text(st, 1, body, body_size, SQLITE_STATIC)
+        sqlite3_bind_int(st, 2, document_id)
+    else:
+        st = env.insert_document_st
+        sqlite3_reset(st)
+        sqlite3_bind_text(st, 1, title, title_size, SQLITE_STATIC)
+        sqlite3_bind_text(st, 2, body, body_size, SQLITE_STATIC)
+        if rc == SQLITE_BUSY:
+            rc = sqlite3_step(st)
+        elif rc == SQLITE_ERROR:
+            print("ERROR: %s" % sqlite3_errmsg(env.db))
+        elif rc == SQLITE_MISUSE:
+            print("MISUSE: %s" % sqlite3_errmsg(env.db))
+    return rc
