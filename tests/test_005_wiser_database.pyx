@@ -17,9 +17,11 @@ __LICENSE__ = """Today Ike Tohru 11:31pm Ike Tohru
 cimport sqlite3
 from sqlite3 cimport sqlite3, sqlite3_open, sqlite3_close
 from sqlite3 cimport sqlite3_stmt
-from sqlite3 cimport sqlite3_step, sqlite3_column_int
+from sqlite3 cimport sqlite3_step
 from sqlite3 cimport sqlite3_exec, sqlite3_prepare
-from sqlite3 cimport sqlite3_bind_text
+from sqlite3 cimport sqlite3_bind_int, sqlite3_bind_text
+from sqlite3 cimport sqlite3_column_bytes
+from sqlite3 cimport sqlite3_column_int, sqlite3_column_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK, SQLITE_ROW
@@ -162,4 +164,18 @@ cdef int db_get_document_id(const wiser_env *env,
         return sqlite3_column_int(env.get_document_id_st, 0)
     else:
         return 0
-    #TODO
+
+cdef int db_get_document_title(const wiser_env *env, int document_id,
+                               const char **title, int *title_size):
+    cdef int rc
+    sqlite3_reset(env.get_document_title_st)
+    sqlite3_bind_int(env.get_document_title_st, 1, document_id)
+    rc = sqlite3_step(env.get_document_title_st)
+    if rc == SQLITE_ROW:
+        if title:
+            title[0] = <const char *>sqlite3_column_text(env.get_document_title_st,
+                                                         0)
+        if title_size:
+            title_size[0] = <int>sqlite3_column_bytes(env.get_document_title_st,
+                                                      0)
+    return 0

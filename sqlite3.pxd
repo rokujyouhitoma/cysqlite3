@@ -62,12 +62,15 @@ cdef extern from "<sqlite3.h>":
       int nByte,
       sqlite3_stmt **ppStmt,
       const char **pzTail) #L3208
+
+  cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3439
   cdef extern int sqlite3_bind_text(sqlite3_stmt*,
                                     int,
                                     const char*,
                                     int n,
                                     void(*)(void*)) #L3442
   cdef extern int sqlite3_step(sqlite3_stmt*) #L3720
+  cdef extern int sqlite3_column_bytes(sqlite3_stmt*, int iCol)
   cdef extern int sqlite3_column_int(sqlite3_stmt*, int iCol) #L3940
   cdef extern const unsigned char *sqlite3_column_text(sqlite3_stmt*, int iCol) #L3942
   cdef extern int sqlite3_finalize(sqlite3_stmt *pStmt) #L3972
