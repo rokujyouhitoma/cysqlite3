@@ -62,7 +62,16 @@ cdef extern from "<sqlite3.h>":
       int nByte,
       sqlite3_stmt **ppStmt,
       const char **pzTail) #L3208
-
+  ctypedef struct sqlite3_value
+  cdef extern int sqlite3_bind_blob(sqlite3_stmt*, int, const void*, int n, void(*)(void*)) #L3438
+  cdef extern int sqlite3_bind_double(sqlite3_stmt*, int, double) #L3438
+  cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3438
+  cdef extern int sqlite3_bind_int64(sqlite3_stmt*, int, sqlite3_int64) #L3438
+  cdef extern int sqlite3_bind_null(sqlite3_stmt*, int) #L3438
+  cdef extern int sqlite3_bind_text(sqlite3_stmt*, int, const char*, int n, void(*)(void*)) #L3438
+  cdef extern int sqlite3_bind_text16(sqlite3_stmt*, int, const void*, int, void(*)(void*)) #L3438
+  cdef extern int sqlite3_bind_value(sqlite3_stmt*, int, const sqlite3_value*) #L3438
+  cdef extern int sqlite3_bind_zeroblob(sqlite3_stmt*, int, int n) #L3438
   cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3439
   cdef extern int sqlite3_bind_text(sqlite3_stmt*,
                                     int,

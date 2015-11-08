@@ -23,6 +23,7 @@ from sqlite3 cimport sqlite3_bind_int, sqlite3_bind_text
 from sqlite3 cimport sqlite3_column_bytes
 from sqlite3 cimport sqlite3_column_int, sqlite3_column_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
+from sqlite3 cimport sqlite3_bind_blob
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK, SQLITE_ROW
 from sqlite3 cimport SQLITE_BUSY, SQLITE_ERROR, SQLITE_MISUSE
@@ -205,3 +206,26 @@ cdef int db_add_document(const wiser_env *env,
         elif rc == SQLITE_MISUSE:
             print("MISUSE: %s" % sqlite3_errmsg(env.db))
     return rc
+
+cdef int db_get_token_id(const wiser_env *env,
+                         const char *str, unsigned int str_size, int insert,
+                         int *docs_count):
+    cdef int rc
+    if insert:
+        sqlite3_reset(env.store_token_st)
+        sqlite3_bind_text(env.store_token_st, 1, str, str_size,
+                          SQLITE_STATIC)
+        sqlite3_bind_blob(env.store_token_st, 2, "", 0, SQLITE_STATIC)
+        rc = sqlite3_step(env.store_token_st)
+    sqlite3_reset(env.get_token_id_st)
+    sqlite3_bind_text(env.get_token_id_st, 1, str, str_size,
+                      SQLITE_STATIC)
+    rc = sqlite3_step(env.get_token_id_st)
+    if rc == SQLITE_ROW:
+        if docs_count:
+            docs_count[0] = sqlite3_column_int(env.get_token_id_st, 1)
+        return sqlite3_column_int(env.get_token_id_st, 0)
+    else:
+        if docs_count:
+            docs_count[0] = 0
+        return 0
