@@ -3,6 +3,10 @@ cdef extern from "<sqlite3.h>":
   cdef char[] SQLITE_VERSION #L113
   cdef int SQLITE_VERSION_NUMBER #L114
   cdef char[] SQLITE_SOURCE_ID #L115
+  cdef const char sqlite3_version[]
+  cdef extern const char *sqlite3_libversion()
+  cdef extern const char *sqlite3_sourceid()
+  cdef extern int sqlite3_libversion_number()
   ctypedef struct sqlite3 #L231
   #TODO: support for multy platforms.
   ctypedef long long int sqlite_int64 #L256
