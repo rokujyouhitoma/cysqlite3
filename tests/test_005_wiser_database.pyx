@@ -229,3 +229,17 @@ cdef int db_get_token_id(const wiser_env *env,
         if docs_count:
             docs_count[0] = 0
         return 0
+
+cdef int db_get_token(const wiser_env *env,
+                      const int token_id,
+                      const char **token, int *token_size):
+    cdef int rc
+    sqlite3_reset(env.get_token_st)
+    sqlite3_bind_int(env.get_token_st, 1, token_id)
+    rc = sqlite3_step(env.get_token_st)
+    if rc == SQLITE_ROW:
+        if token:
+            token[0] = <const char *>sqlite3_column_text(env.get_token_st, 0)
+        if token_size:
+            token_size[0] = <int>sqlite3_column_bytes(env.get_token_st, 0)
+    return 0
