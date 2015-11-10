@@ -317,10 +317,16 @@ cdef int db_replace_settings(const wiser_env *env, const char *key,
     return rc
 
 cdef int db_get_document_count(const wiser_env *env):
-   cdef int rc
-   sqlite3_reset(env.get_document_count_st)
-   rc = sqlite3_step(env.get_document_count_st)
-   if rc == SQLITE_ROW:
-       return sqlite3_column_int(env.get_document_count_st, 0)
-   else:
-       return -1
+    cdef int rc
+    sqlite3_reset(env.get_document_count_st)
+    rc = sqlite3_step(env.get_document_count_st)
+    if rc == SQLITE_ROW:
+        return sqlite3_column_int(env.get_document_count_st, 0)
+    else:
+        return -1
+
+cdef int begin(const wiser_env *env):
+    return sqlite3_step(env.begin_st)
+
+cdef int commit(const wiser_env *env):
+    return sqlite3_step(env.commit_st)
