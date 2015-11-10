@@ -265,3 +265,21 @@ cdef int db_get_postings(const wiser_env *env, int token_id,
         if postings_size: postings_size[0] = 0
         if rc == SQLITE_DONE: rc = 0
     return rc
+
+cdef int db_update_postings(const wiser_env *env, int token_id, int docs_count,
+                            void *postings, int postings_size):
+
+    cdef int rc
+    sqlite3_reset(env.update_postings_st)
+    sqlite3_bind_int(env.update_postings_st, 1, docs_count)
+    sqlite3_bind_blob(env.update_postings_st, 2, postings,
+                      <unsigned int>postings_size, SQLITE_STATIC)
+    sqlite3_bind_int(env.update_postings_st, 3, token_id)
+
+    if rc == SQLITE_BUSY:
+        rc = sqlite3_step(env.update_postings_st)
+    elif rc == SQLITE_ERROR:
+        print("ERROR: %s" % sqlite3_errmsg(env.db))
+    elif rc == SQLITE_MISUSE:
+        print("MISUSE: %s", % sqlite3_errmsg(env.db))
+    return rc
