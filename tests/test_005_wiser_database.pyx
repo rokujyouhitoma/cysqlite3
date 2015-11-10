@@ -315,3 +315,12 @@ cdef int db_replace_settings(const wiser_env *env, const char *key,
     elif rc == SQLITE_MISUSE:
         print("MISUSE: %s" % sqlite3_errmsg(env.db))
     return rc
+
+cdef int db_get_document_count(const wiser_env *env):
+   cdef int rc
+   sqlite3_reset(env.get_document_count_st)
+   rc = sqlite3_step(env.get_document_count_st)
+   if rc == SQLITE_ROW:
+       return sqlite3_column_int(env.get_document_count_st, 0)
+   else:
+       return -1
