@@ -290,10 +290,28 @@ cdef int db_get_settings(const wiser_env *env, const char *key, int key_size,
     sqlite3_reset(env.get_settings_st)
     sqlite3_bind_text(env.get_settings_st, 1,
                       key, key_size, SQLITE_STATIC)
-    rc = sqlite3_step(env.get_settings_st);
+    rc = sqlite3_step(env.get_settings_st)
     if rc == SQLITE_ROW:
         if value:
             value[0] = <const char *>sqlite3_column_text(env.get_settings_st, 0)
         if value_size:
             value_size[0] = <int>sqlite3_column_bytes(env.get_settings_st, 0)
     return 0
+
+cdef int db_replace_settings(const wiser_env *env, const char *key,
+                             int key_size,
+                             const char *value, int value_size):
+    cdef int rc
+    sqlite3_reset(env.replace_settings_st)
+    sqlite3_bind_text(env.replace_settings_st, 1,
+                      key, key_size, SQLITE_STATIC)
+    sqlite3_bind_text(env.replace_settings_st, 2,
+                      value, value_size, SQLITE_STATIC)
+
+    if rc == SQLITE_BUSY:
+        rc = sqlite3_step(env.replace_settings_st)
+    elif rc ==  SQLITE_ERROR:
+        print("ERROR: %s" % sqlite3_errmsg(env.db))
+    elif rc == SQLITE_MISUSE:
+        print("MISUSE: %s" % sqlite3_errmsg(env.db))
+    return rc
