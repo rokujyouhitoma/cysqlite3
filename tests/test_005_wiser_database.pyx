@@ -24,9 +24,10 @@ from sqlite3 cimport sqlite3_column_bytes
 from sqlite3 cimport sqlite3_column_int, sqlite3_column_text
 from sqlite3 cimport sqlite3_finalize, sqlite3_reset
 from sqlite3 cimport sqlite3_bind_blob
+from sqlite3 cimport sqlite3_column_blob
 from sqlite3 cimport sqlite3_errmsg
 from sqlite3 cimport SQLITE_OK, SQLITE_ROW
-from sqlite3 cimport SQLITE_BUSY, SQLITE_ERROR, SQLITE_MISUSE
+from sqlite3 cimport SQLITE_BUSY, SQLITE_ERROR, SQLITE_MISUSE, SQLITE_DONE
 from sqlite3 cimport SQLITE_STATIC
 
 # Translate it from wiser/wiser.h
@@ -243,3 +244,24 @@ cdef int db_get_token(const wiser_env *env,
         if token_size:
             token_size[0] = <int>sqlite3_column_bytes(env.get_token_st, 0)
     return 0
+
+cdef int db_get_postings(const wiser_env *env, int token_id,
+                         int *docs_count, void **postings, int *postings_size):
+    cdef int rc
+    sqlite3_reset(env.get_postings_st)
+    sqlite3_bind_int(env.get_postings_st, 1, token_id)
+    rc = sqlite3_step(env.get_postings_st)
+    if rc == SQLITE_ROW:
+        if docs_count:
+            docs_count[0] = sqlite3_column_int(env.get_postings_st, 0)
+        if postings:
+            postings[0] = <void *>sqlite3_column_blob(env.get_postings_st, 1)
+        if postings_size:
+            postings_size[0] = <int>sqlite3_column_bytes(env.get_postings_st, 1)
+        rc = 0
+    else:
+        if docs_count: docs_count[0] = 0
+        if postings: postings[0] = NULL
+        if postings_size: postings_size[0] = 0
+        if rc == SQLITE_DONE: rc = 0
+    return rc
