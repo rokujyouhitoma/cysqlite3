@@ -330,3 +330,6 @@ cdef int begin(const wiser_env *env):
 
 cdef int commit(const wiser_env *env):
     return sqlite3_step(env.commit_st)
+
+cdef int rollback(const wiser_env *env):
+    return sqlite3_step(env.rollback_st)
