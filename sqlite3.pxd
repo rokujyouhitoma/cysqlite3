@@ -9,6 +9,7 @@ cdef extern from "<sqlite3.h>":
   cdef extern int sqlite3_libversion_number() #L150
   cdef int sqlite3_compileoption_used(const char *zOptName) #L175
   cdef const char *sqlite3_compileoption_get(int N) #L176
+  cdef int sqlite3_threadsafe() #L215
   ctypedef struct sqlite3 #L231
   #TODO: support for multy platforms.
   ctypedef long long int sqlite_int64 #L256
