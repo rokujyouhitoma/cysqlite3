@@ -13,7 +13,10 @@ cdef extern from "<sqlite3.h>":
   ctypedef struct sqlite3 #L231
   #TODO: support for multy platforms.
   ctypedef long long int sqlite_int64 #L256
+  ctypedef unsigned long long int sqlite_uint64 #L257
   ctypedef sqlite_int64 sqlite3_int64 #L259
+  ctypedef sqlite_uint64 sqlite3_uint64 #L260
+  cdef extern  int sqlite3_close(sqlite3*) #L311
   cdef extern int sqlite3_close(sqlite3*) #L312
   cdef extern int sqlite3_exec(
       sqlite3*,
