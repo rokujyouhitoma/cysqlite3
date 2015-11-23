@@ -57,7 +57,7 @@ cdef extern from "<sqlite3.h>":
   cdef int SQLITE_ROW
   cdef int SQLITE_DONE #L434
   cdef int SQLITE_IOERR_READ = SQLITE_IOERR if SQLITE_IOERR else 1<<8 #L460
-#define SQLITE_IOERR_SHORT_READ        (SQLITE_IOERR | (2<<8))
+  cdef int SQLITE_IOERR_SHORT_READ = SQLITE_IOERR if SQLITE_IOERR else 2<<8
 #define SQLITE_IOERR_WRITE             (SQLITE_IOERR | (3<<8))
 #define SQLITE_IOERR_FSYNC             (SQLITE_IOERR | (4<<8))
 #define SQLITE_IOERR_DIR_FSYNC         (SQLITE_IOERR | (5<<8))
