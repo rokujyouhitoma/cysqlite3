@@ -108,7 +108,9 @@ cdef extern from "<sqlite3.h>":
 #define SQLITE_NOTICE_RECOVER_WAL      (SQLITE_NOTICE | (1<<8))
 #define SQLITE_NOTICE_RECOVER_ROLLBACK (SQLITE_NOTICE | (2<<8))
 #define SQLITE_WARNING_AUTOINDEX       (SQLITE_WARNING | (1<<8)) #L511
-  cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*)
+  # TODO: CAPI3REF: Flags For File Open Operations
+  ctypedef struct sqlite3_file "sqlite3_file" #L645
+  cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
