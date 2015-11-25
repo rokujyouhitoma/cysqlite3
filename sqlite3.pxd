@@ -110,6 +110,8 @@ cdef extern from "<sqlite3.h>":
 #define SQLITE_WARNING_AUTOINDEX       (SQLITE_WARNING | (1<<8)) #L511
   # TODO: CAPI3REF: Flags For File Open Operations
   ctypedef struct sqlite3_file "sqlite3_file" #L645
+  ctypedef struct sqlite3_file:
+     pass
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
