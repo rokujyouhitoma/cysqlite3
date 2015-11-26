@@ -111,7 +111,8 @@ cdef extern from "<sqlite3.h>":
   # TODO: CAPI3REF: Flags For File Open Operations
   ctypedef struct sqlite3_file "sqlite3_file" #L645
   ctypedef struct sqlite3_file:
-     pass
+      sqlite3_io_methods *pMethods #647
+  ctypedef struct sqlite3_io_methods "sqlite3_io_methods" #L740
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
