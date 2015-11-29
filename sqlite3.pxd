@@ -158,6 +158,7 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_GET_LOCKPROXYFILE = SQLITE_FCNTL_GET_LOCKPROXYFILE
   DEF SQLITE_SET_LOCKPROXYFILE = SQLITE_FCNTL_SET_LOCKPROXYFILE
   DEF SQLITE_LAST_ERRNO = SQLITE_FCNTL_LAST_ERRNO #L991
+  ctypedef struct sqlite3_mutex "sqlite3_mutex"
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
