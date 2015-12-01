@@ -161,6 +161,30 @@ cdef extern from "<sqlite3.h>":
   ctypedef struct sqlite3_mutex "sqlite3_mutex" #L1003
   ctypedef struct sqlite3_vfs "sqlite3_vfs" #L1162
   ctypedef void (*sqlite3_syscall_ptr)() #L1163
+  ctypedef struct sqlite3_vfs: #L1164
+    int iVersion
+    int szOsFile
+    int mxPathname
+    sqlite3_vfs *pNext
+    const char *zName
+    void *pAppData
+    int (*xOpen)(sqlite3_vfs*, const char *zName, sqlite3_file*,
+                 int flags, int *pOutFlags)
+    int (*xDelete)(sqlite3_vfs*, const char *zName, int syncDir)
+    int (*xAccess)(sqlite3_vfs*, const char *zName, int flags, int *pResOut)
+    int (*xFullPathname)(sqlite3_vfs*, const char *zName, int nOut, char *zOut)
+    void *(*xDlOpen)(sqlite3_vfs*, const char *zFilename)
+    void (*xDlError)(sqlite3_vfs*, int nByte, char *zErrMsg)
+    void (*(*xDlSym)(sqlite3_vfs*,void*, const char *zSymbol))()
+    void (*xDlClose)(sqlite3_vfs*, void*)
+    int (*xRandomness)(sqlite3_vfs*, int nByte, char *zOut)
+    int (*xSleep)(sqlite3_vfs*, int microseconds)
+    int (*xCurrentTime)(sqlite3_vfs*, double*)
+    int (*xGetLastError)(sqlite3_vfs*, int, char *)
+    int (*xCurrentTimeInt64)(sqlite3_vfs*, sqlite3_int64*)
+    int (*xSetSystemCall)(sqlite3_vfs*, const char *zName, sqlite3_syscall_ptr)
+    sqlite3_syscall_ptr (*xGetSystemCall)(sqlite3_vfs*, const char *zName)
+    const char *(*xNextSystemCall)(sqlite3_vfs*, const char *zName)
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
