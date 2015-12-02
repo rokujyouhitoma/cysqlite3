@@ -185,6 +185,14 @@ cdef extern from "<sqlite3.h>":
     int (*xSetSystemCall)(sqlite3_vfs*, const char *zName, sqlite3_syscall_ptr)
     sqlite3_syscall_ptr (*xGetSystemCall)(sqlite3_vfs*, const char *zName)
     const char *(*xNextSystemCall)(sqlite3_vfs*, const char *zName)
+
+  DEF SQLITE_ACCESS_EXISTS = 0 #L1223
+  DEF SQLITE_ACCESS_READWRITE = 1 #L1224
+  DEF SQLITE_ACCESS_READ = 2 #L1225
+  DEF SQLITE_SHM_UNLOCK = 1 #L1249
+  DEF SQLITE_SHM_LOCK = 2 #L1250
+  DEF SQLITE_SHM_SHARED = 4 #L1251
+  DEF SQLITE_SHM_EXCLUSIVE = 8 #L1252
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
