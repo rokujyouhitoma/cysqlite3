@@ -193,6 +193,12 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_SHM_LOCK = 2 #L1250
   DEF SQLITE_SHM_SHARED = 4 #L1251
   DEF SQLITE_SHM_EXCLUSIVE = 8 #L1252
+  DEF SQLITE_SHM_NLOCK = 8 #L1262
+  cdef int sqlite3_initialize() #L1340
+  cdef int sqlite3_shutdown() #L1341
+  cdef int sqlite3_os_init() #L1342
+  cdef int sqlite3_os_end() #L1343
+  cdef int sqlite3_config(int, ...) #L1374
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
