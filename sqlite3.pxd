@@ -200,6 +200,16 @@ cdef extern from "<sqlite3.h>":
   cdef int sqlite3_os_end() #L1343
   cdef int sqlite3_config(int, ...) #L1374
   cdef int sqlite3_db_config(sqlite3*, int op, ...) #L1392
+  ctypedef struct sqlite3_mem_methods "sqlite3_mem_methods" #L1457
+  ctypedef struct sqlite3_mem_methods: #L1458
+    void *(*xMalloc)(int)
+    void (*xFree)(void*)
+    void *(*xRealloc)(void*,int)
+    int (*xSize)(void*)
+    int (*xRoundup)(int)
+    int (*xInit)(void*)
+    void (*xShutdown)(void*)
+    void *pAppData
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
