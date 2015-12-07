@@ -148,6 +148,14 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_IOCAP_UNDELETABLE_WHEN_OPEN = 0x00000800
   DEF SQLITE_IOCAP_POWERSAFE_OVERWRITE   = 0x00001000
   DEF SQLITE_IOCAP_IMMUTABLE             = 0x00002000 #L589
+  DEF SQLITE_LOCK_NONE          = 0 #L598
+  DEF SQLITE_LOCK_SHARED        = 1
+  DEF SQLITE_LOCK_RESERVED      = 2
+  DEF SQLITE_LOCK_PENDING       = 3
+  DEF SQLITE_LOCK_EXCLUSIVE     = 4 #L602
+  DEF SQLITE_SYNC_NORMAL        = 0x00002 #L630
+  DEF SQLITE_SYNC_FULL          = 0x00003
+  DEF SQLITE_SYNC_DATAONLY      = 0x00010 #L632
   # TODO: CAPI3REF: Flags For File Open Operations
   ctypedef struct sqlite3_file "sqlite3_file" #L645
   ctypedef struct sqlite3_file:
