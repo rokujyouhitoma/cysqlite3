@@ -249,7 +249,7 @@ cdef extern from "<sqlite3.h>":
   cdef int sqlite3_config(int, ...) #L1374
   cdef int sqlite3_db_config(sqlite3*, int op, ...) #L1392
   ctypedef struct sqlite3_mem_methods "sqlite3_mem_methods" #L1457
-  ctypedef struct sqlite3_mem_methods: #L1458
+  ctypedef struct sqlite3_mem_methods #L1458
     void *(*xMalloc)(int)
     void (*xFree)(void*)
     void *(*xRealloc)(void*,int)
