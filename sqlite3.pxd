@@ -159,7 +159,7 @@ cdef extern from "<sqlite3.h>":
   # TODO: CAPI3REF: Flags For File Open Operations
   ctypedef struct sqlite3_file "sqlite3_file" #L645
   ctypedef struct sqlite3_file:
-      sqlite3_io_methods *pMethods #647
+      const sqlite3_io_methods *pMethods #647
   ctypedef struct sqlite3_io_methods "sqlite3_io_methods" #L740
   ctypedef struct sqlite3_io_methods:
       int iVersion
