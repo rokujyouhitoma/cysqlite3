@@ -258,6 +258,20 @@ cdef extern from "<sqlite3.h>":
     int (*xInit)(void*)
     void (*xShutdown)(void*)
     void *pAppData
+  DEF SQLITE_CONFIG_SINGLETHREAD = 1 #L1747
+  DEF SQLITE_CONFIG_MULTITHREAD  = 2
+  DEF SQLITE_CONFIG_SERIALIZED   = 3
+  DEF SQLITE_CONFIG_MALLOC       = 4
+  DEF SQLITE_CONFIG_GETMALLOC    = 5
+  DEF SQLITE_CONFIG_SCRATCH      = 6
+  DEF SQLITE_CONFIG_PAGECACHE    = 7
+  DEF SQLITE_CONFIG_HEAP         = 8
+  DEF SQLITE_CONFIG_MEMSTATUS    = 9
+  DEF SQLITE_CONFIG_MUTEX        = 10
+  DEF SQLITE_CONFIG_GETMUTEX     = 11 #L1757
+
+  #TODO
+  
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
