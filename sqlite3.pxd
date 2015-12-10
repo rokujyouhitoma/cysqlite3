@@ -283,6 +283,7 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_DBCONFIG_LOOKASIDE       = 1001 #L1829
   DEF SQLITE_DBCONFIG_ENABLE_FKEY     = 1002
   DEF SQLITE_DBCONFIG_ENABLE_TRIGGER  = 1003 #L1831
+  cdef int sqlite3_extended_result_codes(sqlite3*, int onoff) #L1841
 
   #TODO
 
