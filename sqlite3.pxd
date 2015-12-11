@@ -7,9 +7,9 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_libversion() #L148
   cdef extern const char *sqlite3_sourceid() #L149
   cdef extern int sqlite3_libversion_number() #L150
-  cdef int sqlite3_compileoption_used(const char *zOptName) #L175
-  cdef const char *sqlite3_compileoption_get(int N) #L176
-  cdef int sqlite3_threadsafe() #L215
+  cdef extern int sqlite3_compileoption_used(const char *zOptName) #L175
+  cdef extern const char *sqlite3_compileoption_get(int N) #L176
+  cdef extern int sqlite3_threadsafe() #L215
   ctypedef struct sqlite3 #L231
   #TODO: support for multy platforms.
   ctypedef long long int sqlite_int64 #L256
@@ -283,10 +283,7 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_DBCONFIG_LOOKASIDE       = 1001 #L1829
   DEF SQLITE_DBCONFIG_ENABLE_FKEY     = 1002
   DEF SQLITE_DBCONFIG_ENABLE_TRIGGER  = 1003 #L1831
-  cdef int sqlite3_extended_result_codes(sqlite3*, int onoff) #L1841
-
-  #TODO
-
+  cdef extern int sqlite3_extended_result_codes(sqlite3*, int onoff) #L1841
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
