@@ -285,6 +285,14 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_DBCONFIG_ENABLE_TRIGGER  = 1003 #L1831
   cdef extern int sqlite3_extended_result_codes(sqlite3*, int onoff) #L1841
   cdef extern sqlite3_int64 sqlite3_last_insert_rowid(sqlite3*) #L1892
+  cdef extern int sqlite3_changes(sqlite3*) #L1946
+  cdef extern int sqlite3_total_changes(sqlite3*) #L1972
+  cdef extern void sqlite3_interrupt(sqlite3*) #L2011
+  cdef extern int sqlite3_complete(const char *sql) #L2046
+  cdef extern int sqlite3_complete16(const void *sql) #L2047
+
+  #TODO
+
   cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
