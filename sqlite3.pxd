@@ -290,6 +290,8 @@ cdef extern from "<sqlite3.h>":
   cdef extern void sqlite3_interrupt(sqlite3*) #L2011
   cdef extern int sqlite3_complete(const char *sql) #L2046
   cdef extern int sqlite3_complete16(const void *sql) #L2047
+  cdef extern int sqlite3_busy_handler(sqlite3*, int(*)(void*,int), void*) #L2113
+  cdef extern int sqlite3_busy_timeout(sqlite3*, int ms) #L2133
 
   #TODO
 
