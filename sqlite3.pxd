@@ -292,6 +292,14 @@ cdef extern from "<sqlite3.h>":
   cdef extern int sqlite3_complete16(const void *sql) #L2047
   cdef extern int sqlite3_busy_handler(sqlite3*, int(*)(void*,int), void*) #L2113
   cdef extern int sqlite3_busy_timeout(sqlite3*, int ms) #L2133
+  cdef extern int sqlite3_get_table( #L2207
+      sqlite3 *db,
+      const char *zSql,
+      char ***pazResult,
+      int *pnRow,
+      int *pnColumn,
+      char **pzErrmsg)
+  cdef extern void sqlite3_free_table(char **result) #L2215
 
   #TODO
 
