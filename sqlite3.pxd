@@ -300,6 +300,10 @@ cdef extern from "<sqlite3.h>":
       int *pnColumn,
       char **pzErrmsg)
   cdef extern void sqlite3_free_table(char **result) #L2215
+  cdef extern char *sqlite3_mprintf(const char*,...) #L2312
+  cdef extern char *sqlite3_vmprintf(const char*, va_list) #L2313
+  cdef extern char *sqlite3_snprintf(int,char*,const char*, ...) #L2314
+  cdef extern char *sqlite3_vsnprintf(int,char*,const char*, va_list) #L2315
 
   #TODO
 
