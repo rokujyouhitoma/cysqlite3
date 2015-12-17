@@ -304,10 +304,15 @@ cdef extern from "<sqlite3.h>":
   cdef extern char *sqlite3_vmprintf(const char*, va_list) #L2313
   cdef extern char *sqlite3_snprintf(int,char*,const char*, ...) #L2314
   cdef extern char *sqlite3_vsnprintf(int,char*,const char*, va_list) #L2315
+  cdef extern void *sqlite3_malloc(int) #L2386
+  cdef extern void *sqlite3_realloc(void*, int) #L2387
+  cdef extern void sqlite3_free(void*) #L2388
+  cdef extern sqlite3_int64 sqlite3_memory_used() #L2413
+  cdef extern sqlite3_int64 sqlite3_memory_highwater(int resetFlag) #L2414
+  cdef extern void sqlite3_randomness(int N, void *P) #L2436
 
   #TODO
 
-  cdef extern void sqlite3_free(void*) #L2388
   cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
   ctypedef struct sqlite3_stmt #L3013
