@@ -310,6 +310,12 @@ cdef extern from "<sqlite3.h>":
   cdef extern sqlite3_int64 sqlite3_memory_used() #L2413
   cdef extern sqlite3_int64 sqlite3_memory_highwater(int resetFlag) #L2414
   cdef extern void sqlite3_randomness(int N, void *P) #L2436
+  cdef extern int sqlite3_set_authorizer( #L2518
+      sqlite3*,
+      int (*xAuth)(void*,int,const char*,const char*,const char*,const char*),
+      void *pUserData)
+  DEF SQLITE_DENY = 1 #L2536
+  DEF SQLITE_IGNORE = 2 #L2537
 
   #TODO
 
