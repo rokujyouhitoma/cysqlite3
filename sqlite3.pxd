@@ -316,6 +316,40 @@ cdef extern from "<sqlite3.h>":
       void *pUserData)
   DEF SQLITE_DENY = 1 #L2536
   DEF SQLITE_IGNORE = 2 #L2537
+  DEF SQLITE_CREATE_INDEX         =  1 #L2559
+  DEF SQLITE_CREATE_TABLE         =  2
+  DEF SQLITE_CREATE_TEMP_INDEX    =  3
+  DEF SQLITE_CREATE_TEMP_TABLE    =  4
+  DEF SQLITE_CREATE_TEMP_TRIGGER  =  5
+  DEF SQLITE_CREATE_TEMP_VIEW     =  6
+  DEF SQLITE_CREATE_TRIGGER       =  7
+  DEF SQLITE_CREATE_VIEW          =  8
+  DEF SQLITE_DELETE               =  9
+  DEF SQLITE_DROP_INDEX           = 10
+  DEF SQLITE_DROP_TABLE           = 11
+  DEF SQLITE_DROP_TEMP_INDEX      = 12
+  DEF SQLITE_DROP_TEMP_TABLE      = 13
+  DEF SQLITE_DROP_TEMP_TRIGGER    = 14
+  DEF SQLITE_DROP_TEMP_VIEW       = 15
+  DEF SQLITE_DROP_TRIGGER         = 16
+  DEF SQLITE_DROP_VIEW            = 17
+  DEF SQLITE_INSERT               = 18
+  DEF SQLITE_PRAGMA               = 19
+  DEF SQLITE_READ                 = 20
+  DEF SQLITE_SELECT               = 21
+  DEF SQLITE_TRANSACTION          = 22
+  DEF SQLITE_UPDATE               = 23
+  DEF SQLITE_ATTACH               = 24
+  DEF SQLITE_DETACH               = 25
+  DEF SQLITE_ALTER_TABLE          = 26
+  DEF SQLITE_REINDEX              = 27
+  DEF SQLITE_ANALYZE              = 28
+  DEF SQLITE_CREATE_VTABLE        = 29
+  DEF SQLITE_DROP_VTABLE          = 30
+  DEF SQLITE_FUNCTION             = 31
+  DEF SQLITE_SAVEPOINT            = 32
+  DEF SQLITE_COPY                 =  0
+  DEF SQLITE_RECURSIVE            = 33 #L2592
 
   #TODO
 
