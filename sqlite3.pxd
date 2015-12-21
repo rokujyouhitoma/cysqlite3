@@ -350,6 +350,9 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_SAVEPOINT            = 32
   DEF SQLITE_COPY                 =  0
   DEF SQLITE_RECURSIVE            = 33 #L2592
+  cdef void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*) #L2622
+  cdef void *sqlite3_profile(sqlite3*,
+                             void(*xProfile)(void*,const char*,sqlite3_uint64), void*) #L2623
 
   #TODO
 
