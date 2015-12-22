@@ -353,6 +353,7 @@ cdef extern from "<sqlite3.h>":
   cdef void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*) #L2622
   cdef void *sqlite3_profile(sqlite3*,
                              void(*xProfile)(void*,const char*,sqlite3_uint64), void*) #L2623
+  cdef void sqlite3_progress_handler(sqlite3*, int, int(*)(void*), void*) #L2657
 
   #TODO
 
