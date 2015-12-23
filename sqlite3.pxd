@@ -350,14 +350,22 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_SAVEPOINT            = 32
   DEF SQLITE_COPY                 =  0
   DEF SQLITE_RECURSIVE            = 33 #L2592
-  cdef void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*) #L2622
-  cdef void *sqlite3_profile(sqlite3*,
+  cdef extern void *sqlite3_trace(sqlite3*, void(*xTrace)(void*,const char*), void*) #L2622
+  cdef extern void *sqlite3_profile(sqlite3*,
                              void(*xProfile)(void*,const char*,sqlite3_uint64), void*) #L2623
-  cdef void sqlite3_progress_handler(sqlite3*, int, int(*)(void*), void*) #L2657
+  cdef extern void sqlite3_progress_handler(sqlite3*, int, int(*)(void*), void*) #L2657
+  cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
+  cdef extern int sqlite3_open16( #L2890
+      const void *filename,
+      sqlite3 **ppDb)
+  cdef extern int sqlite3_open_v2( #L2894
+      const char *filename,
+      sqlite3 **ppDb,
+      int flags,
+      const char *zVfs)
 
   #TODO
 
-  cdef extern int sqlite3_open(const char *filename, sqlite3 **ppDb) #L2886
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
   ctypedef struct sqlite3_stmt #L3013
   cdef extern int sqlite3_prepare(
