@@ -367,10 +367,14 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_uri_parameter(const char *zFilename, const char *zParam) #L2940
   cdef extern int sqlite3_uri_boolean(const char *zFile, const char *zParam, int bDefault) #L2941
   cdef extern sqlite3_int64 sqlite3_uri_int64(const char*, const char*, sqlite3_int64) #L2942
+  cdef extern int sqlite3_errcode(sqlite3 *db) #L2985
+  cdef extern int sqlite3_extended_errcode(sqlite3 *db) #L2985
+  cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
+  cdef extern const void *sqlite3_errmsg16(sqlite3*) #L2987
+  cdef extern const char *sqlite3_errstr(int) #L2988
 
   #TODO
 
-  cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
   ctypedef struct sqlite3_stmt #L3013
   cdef extern int sqlite3_prepare(
       sqlite3 *db,
