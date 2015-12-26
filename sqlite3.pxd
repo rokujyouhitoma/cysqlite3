@@ -385,21 +385,21 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_LIMIT_LIKE_PATTERN_LENGTH     =  8
   DEF SQLITE_LIMIT_VARIABLE_NUMBER         =  9
   DEF SQLITE_LIMIT_TRIGGER_DEPTH           = 10 #L3118
+  cdef extern int sqlite3_prepare( #L3201
+      sqlite3 *db,
+      const char *zSql,
+      int nByte,
+      sqlite3_stmt **ppStmt,
+      const char **pzTail)
+  cdef extern int sqlite3_prepare_v2( #L3208
+      sqlite3 *db,
+      const char *zSql,
+      int nByte,
+      sqlite3_stmt **ppStmt,
+      const char **pzTail)
 
   #TODO
 
-  cdef extern int sqlite3_prepare(
-      sqlite3 *db,
-      const char *zSql,
-      int nByte,
-      sqlite3_stmt **ppStmt,
-      const char **pzTail) #L3208
-  cdef extern int sqlite3_prepare_v2(
-      sqlite3 *db,
-      const char *zSql,
-      int nByte,
-      sqlite3_stmt **ppStmt,
-      const char **pzTail) #L3208
   ctypedef struct sqlite3_value
   cdef extern int sqlite3_bind_blob(sqlite3_stmt*, int, const void*, int n, void(*)(void*)) #L3438
   cdef extern int sqlite3_bind_double(sqlite3_stmt*, int, double) #L3438
