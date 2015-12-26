@@ -372,10 +372,11 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_errmsg(sqlite3*) #L2986
   cdef extern const void *sqlite3_errmsg16(sqlite3*) #L2987
   cdef extern const char *sqlite3_errstr(int) #L2988
+  ctypedef struct sqlite3_stmt "sqlite3_stmt" #L3013
+  cdef extern int sqlite3_limit(sqlite3*, int id, int newVal) #L3054
 
   #TODO
 
-  ctypedef struct sqlite3_stmt #L3013
   cdef extern int sqlite3_prepare(
       sqlite3 *db,
       const char *zSql,
