@@ -373,7 +373,18 @@ cdef extern from "<sqlite3.h>":
   cdef extern const void *sqlite3_errmsg16(sqlite3*) #L2987
   cdef extern const char *sqlite3_errstr(int) #L2988
   ctypedef struct sqlite3_stmt "sqlite3_stmt" #L3013
-  cdef extern int sqlite3_limit(sqlite3*, int id, int newVal) #L3054
+  extern int sqlite3_limit(sqlite3*, int id, int newVal) #L3054
+  DEF SQLITE_LIMIT_LENGTH                  =  0 #L3108
+  DEF SQLITE_LIMIT_SQL_LENGTH              =  1
+  DEF SQLITE_LIMIT_COLUMN                  =  2
+  DEF SQLITE_LIMIT_EXPR_DEPTH              =  3
+  DEF SQLITE_LIMIT_COMPOUND_SELECT         =  4
+  DEF SQLITE_LIMIT_VDBE_OP                 =  5
+  DEF SQLITE_LIMIT_FUNCTION_ARG            =  6
+  DEF SQLITE_LIMIT_ATTACHED                =  7
+  DEF SQLITE_LIMIT_LIKE_PATTERN_LENGTH     =  8
+  DEF SQLITE_LIMIT_VARIABLE_NUMBER         =  9
+  DEF SQLITE_LIMIT_TRIGGER_DEPTH           = 10 #L3118
 
   #TODO
 
