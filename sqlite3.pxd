@@ -397,6 +397,18 @@ cdef extern from "<sqlite3.h>":
       int nByte,
       sqlite3_stmt **ppStmt,
       const char **pzTail)
+  cdef extern int sqlite3_prepare16( #L3215
+      sqlite3 *db,
+      const void *zSql,
+      int nByte,
+      sqlite3_stmt **ppStmt,
+      const void **pzTail)
+  cdef int sqlite3_prepare16_v2( #L3222
+      sqlite3 *db,
+      const void *zSql,
+      int nByte,
+      sqlite3_stmt **ppStmt,
+      const void **pzTail)
 
   #TODO
 
