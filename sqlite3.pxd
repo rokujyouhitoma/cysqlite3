@@ -409,7 +409,9 @@ cdef extern from "<sqlite3.h>":
       int nByte,
       sqlite3_stmt **ppStmt,
       const void **pzTail)
-  cdef extern const char *sqlite3_sql(sqlite3_stmt *pStmt)
+  cdef extern const char *sqlite3_sql(sqlite3_stmt *pStmt) #L3237
+  cdef extern int sqlite3_stmt_readonly(sqlite3_stmt *pStmt) #L3268
+  cdef extern int sqlite3_stmt_busy(sqlite3_stmt*) #L3287
 
   #TODO
 
