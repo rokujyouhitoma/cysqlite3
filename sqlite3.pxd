@@ -412,6 +412,8 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_sql(sqlite3_stmt *pStmt) #L3237
   cdef extern int sqlite3_stmt_readonly(sqlite3_stmt *pStmt) #L3268
   cdef extern int sqlite3_stmt_busy(sqlite3_stmt*) #L3287
+  ctypedef struct Mem "sqlite3_value" #L3326
+  ctypedef struct sqlite3_context "sqlite3_context" #L3340
 
   #TODO
 
