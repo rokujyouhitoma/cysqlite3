@@ -412,27 +412,20 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_sql(sqlite3_stmt *pStmt) #L3237
   cdef extern int sqlite3_stmt_readonly(sqlite3_stmt *pStmt) #L3268
   cdef extern int sqlite3_stmt_busy(sqlite3_stmt*) #L3287
-  ctypedef struct Mem "sqlite3_value" #L3326
+  ctypedef struct sqlite3_value "Mem" #L3326
   ctypedef struct sqlite3_context "sqlite3_context" #L3340
+  cdef extern int sqlite3_bind_blob(sqlite3_stmt*, int, const void*, int n, void(*)(void*)) #L3437
+  cdef extern int sqlite3_bind_double(sqlite3_stmt*, int, double) #L3438
+  cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3439
+  cdef extern int sqlite3_bind_int64(sqlite3_stmt*, int, sqlite3_int64) #L3440
+  cdef extern int sqlite3_bind_null(sqlite3_stmt*, int) #L3441
+  cdef extern int sqlite3_bind_text(sqlite3_stmt*, int, const char*, int n, void(*)(void*)) #L3442
+  cdef extern int sqlite3_bind_text16(sqlite3_stmt*, int, const void*, int, void(*)(void*)) #L3443
+  cdef extern int sqlite3_bind_value(sqlite3_stmt*, int, const sqlite3_value*) #L3444
+  cdef extern int sqlite3_bind_zeroblob(sqlite3_stmt*, int, int n) #L3445
 
   #TODO
 
-  ctypedef struct sqlite3_value
-  cdef extern int sqlite3_bind_blob(sqlite3_stmt*, int, const void*, int n, void(*)(void*)) #L3438
-  cdef extern int sqlite3_bind_double(sqlite3_stmt*, int, double) #L3438
-  cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3438
-  cdef extern int sqlite3_bind_int64(sqlite3_stmt*, int, sqlite3_int64) #L3438
-  cdef extern int sqlite3_bind_null(sqlite3_stmt*, int) #L3438
-  cdef extern int sqlite3_bind_text(sqlite3_stmt*, int, const char*, int n, void(*)(void*)) #L3438
-  cdef extern int sqlite3_bind_text16(sqlite3_stmt*, int, const void*, int, void(*)(void*)) #L3438
-  cdef extern int sqlite3_bind_value(sqlite3_stmt*, int, const sqlite3_value*) #L3438
-  cdef extern int sqlite3_bind_zeroblob(sqlite3_stmt*, int, int n) #L3438
-  cdef extern int sqlite3_bind_int(sqlite3_stmt*, int, int) #L3439
-  cdef extern int sqlite3_bind_text(sqlite3_stmt*,
-                                    int,
-                                    const char*,
-                                    int n,
-                                    void(*)(void*)) #L3442
   cdef extern int sqlite3_step(sqlite3_stmt*) #L3720
   cdef extern const void *sqlite3_column_blob(sqlite3_stmt*, int iCol) #L3936
   cdef extern int sqlite3_column_bytes(sqlite3_stmt*, int iCol) #L3937
