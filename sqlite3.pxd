@@ -423,6 +423,7 @@ cdef extern from "<sqlite3.h>":
   cdef extern int sqlite3_bind_text16(sqlite3_stmt*, int, const void*, int, void(*)(void*)) #L3443
   cdef extern int sqlite3_bind_value(sqlite3_stmt*, int, const sqlite3_value*) #L3444
   cdef extern int sqlite3_bind_zeroblob(sqlite3_stmt*, int, int n) #L3445
+  cdef extern int sqlite3_bind_parameter_count(sqlite3_stmt*) #3465
 
   #TODO
 
