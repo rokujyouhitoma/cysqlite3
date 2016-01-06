@@ -427,6 +427,7 @@ cdef extern from "<sqlite3.h>":
   cdef extern const char *sqlite3_bind_parameter_name(sqlite3_stmt*, int) #L3492
   cdef extern int sqlite3_bind_parameter_index(sqlite3_stmt*, const char *zName) #L3508
   cdef extern int sqlite3_clear_bindings(sqlite3_stmt*) #L3517
+  cdef extern int sqlite3_column_count(sqlite3_stmt *pStmt) #L3528
 
   #TODO
 
