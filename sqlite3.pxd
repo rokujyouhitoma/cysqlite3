@@ -436,6 +436,8 @@ cdef extern from "<sqlite3.h>":
   cdef extern const void *sqlite3_column_table_name16(sqlite3_stmt*,int)
   cdef extern const char *sqlite3_column_origin_name(sqlite3_stmt*,int)
   cdef extern const void *sqlite3_column_origin_name16(sqlite3_stmt*,int) #L3609
+  cdef extern const char *sqlite3_column_decltype(sqlite3_stmt*,int) #L3640
+  cdef extern const void *sqlite3_column_decltype16(sqlite3_stmt*,int) #L3641
 
   #TODO
 
