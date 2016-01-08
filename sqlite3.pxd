@@ -438,10 +438,20 @@ cdef extern from "<sqlite3.h>":
   cdef extern const void *sqlite3_column_origin_name16(sqlite3_stmt*,int) #L3609
   cdef extern const char *sqlite3_column_decltype(sqlite3_stmt*,int) #L3640
   cdef extern const void *sqlite3_column_decltype16(sqlite3_stmt*,int) #L3641
+  cdef extern int sqlite3_step(sqlite3_stmt*) #L3720
+  cdef extern int sqlite3_data_count(sqlite3_stmt *pStmt) #L3740
+
+  DEF SQLITE_INTEGER  = 1 #L3763
+  DEF SQLITE_FLOAT    = 2
+  DEF SQLITE_BLOB     = 4
+  DEF SQLITE_NULL     = 5 #L3766
+
+  #TODO
+  DEF SQLITE_TEXT     = 3 #L3770
+  DEF SQLITE3_TEXT    = 3 #L3772
 
   #TODO
 
-  cdef extern int sqlite3_step(sqlite3_stmt*) #L3720
   cdef extern const void *sqlite3_column_blob(sqlite3_stmt*, int iCol) #L3936
   cdef extern int sqlite3_column_bytes(sqlite3_stmt*, int iCol) #L3937
   cdef extern int sqlite3_column_int(sqlite3_stmt*, int iCol) #L3940
