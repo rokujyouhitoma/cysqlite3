@@ -450,14 +450,21 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_TEXT     = 3 #L3770
   DEF SQLITE3_TEXT    = 3 #L3772
 
-  #TODO
-
   cdef extern const void *sqlite3_column_blob(sqlite3_stmt*, int iCol) #L3936
   cdef extern int sqlite3_column_bytes(sqlite3_stmt*, int iCol) #L3937
+  cdef extern int sqlite3_column_bytes16(sqlite3_stmt*, int iCol) #L3938
+  cdef extern double sqlite3_column_double(sqlite3_stmt*, int iCol) #L3839
   cdef extern int sqlite3_column_int(sqlite3_stmt*, int iCol) #L3940
+  cdef extern sqlite3_int64 sqlite3_column_int64(sqlite3_stmt*, int iCol) #L3941
   cdef extern const unsigned char *sqlite3_column_text(sqlite3_stmt*, int iCol) #L3942
+  cdef extern const void *sqlite3_column_text16(sqlite3_stmt*, int iCol) #L3943
+  cdef extern int sqlite3_column_type(sqlite3_stmt*, int iCol) #L3944
+  cdef extern sqlite3_value *sqlite3_column_value(sqlite3_stmt*, int iCol) #L3945
   cdef extern int sqlite3_finalize(sqlite3_stmt *pStmt) #L3972
   cdef extern int sqlite3_reset(sqlite3_stmt *pStmt) #L3998
+
+  #TODO
+
   ctypedef void (*sqlite3_destructor_type)(void*) #L4367
   cdef sqlite3_destructor_type SQLITE_STATIC = <sqlite3_destructor_type>0 #L4368
   cdef sqlite3_destructor_type SQLITE_TRANSIENT = <sqlite3_destructor_type>-1 #L4369
