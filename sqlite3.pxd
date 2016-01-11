@@ -462,6 +462,15 @@ cdef extern from "<sqlite3.h>":
   cdef extern sqlite3_value *sqlite3_column_value(sqlite3_stmt*, int iCol) #L3945
   cdef extern int sqlite3_finalize(sqlite3_stmt *pStmt) #L3972
   cdef extern int sqlite3_reset(sqlite3_stmt *pStmt) #L3998
+  ctypedef int sqlite3_create_function( #L4097
+    sqlite3 *db,
+    const char *zFunctionName,
+    int nArg,
+    int eTextRep,
+    void *pApp,
+    void (*xFunc)(sqlite3_context*,int,sqlite3_value**),
+    void (*xStep)(sqlite3_context*,int,sqlite3_value**),
+    void (*xFinal)(sqlite3_context*))
 
   #TODO
 
