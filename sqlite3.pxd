@@ -491,6 +491,13 @@ cdef extern from "<sqlite3.h>":
       void (*xFinal)(sqlite3_context*),
       void(*xDestroy)(void*))
 
+  DEF SQLITE_UTF8           = 1 #L4135
+  DEF SQLITE_UTF16LE        = 2
+  DEF SQLITE_UTF16BE        = 3
+  DEF SQLITE_UTF16          = 4
+  DEF SQLITE_ANY            = 5
+  DEF SQLITE_UTF16_ALIGNED  = 8
+
   #TODO
 
   ctypedef void (*sqlite3_destructor_type)(void*) #L4367
