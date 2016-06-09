@@ -498,6 +498,8 @@ cdef extern from "<sqlite3.h>":
   DEF SQLITE_ANY            = 5
   DEF SQLITE_UTF16_ALIGNED  = 8
 
+  DEF SQLITE_DETERMINISTIC = 0x800 #4150
+
   #TODO
 
   ctypedef void (*sqlite3_destructor_type)(void*) #L4367
